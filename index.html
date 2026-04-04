@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adarsh Raj Singh — Product Manager</title>
+<title>Adarsh Raj — Associate Product Manager</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -22,14 +22,14 @@
   --fd: 'Syne', sans-serif;
   --fb: 'DM Sans', sans-serif;
 }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body { background: var(--black); color: var(--white); font-family: var(--fb); overflow-x: hidden; cursor: none; }
 
 #cur { width:10px;height:10px;background:var(--purple-mid);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .15s; }
 #cur-r { width:36px;height:36px;border:1px solid rgba(168,85,247,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:border-color .2s; }
 
 nav {
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:0;left:0;right:0;z-index:500;
   padding:1.25rem 4rem;
   display:flex;justify-content:space-between;align-items:center;
   background:rgba(2,2,4,0.5);
@@ -43,12 +43,39 @@ nav {
 .nm a { color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .2s; }
 .nm a:hover { color:var(--white); }
 
-.hero { position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;padding:0 2rem; }
-#hc { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
-.hcont { position:relative;z-index:2; }
+/* ── HERO ── */
+.hero {
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  text-align:center;
+  padding:6rem 2rem 4rem;
+  /* FIX: hero is only the viewport — sections below are fully separate */
+  z-index:0;
+}
+/* Canvas is ONLY inside hero — does not bleed */
+#hc { position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none; }
 
-.badge { display:inline-flex;align-items:center;gap:.6rem;padding:.45rem 1.25rem;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);border-radius:100px;font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--purple-light);margin-bottom:2.5rem;opacity:0;animation:fU .8s ease .2s forwards; }
-.bdot { width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80; }
+.hcont { position:relative;z-index:2;display:flex;flex-direction:column;align-items:center; }
+
+.badge {
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.5rem 1.35rem;
+  background:rgba(20,8,45,0.85);
+  border:1px solid rgba(168,85,247,0.55);
+  border-radius:100px;
+  font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#d8b4fe;
+  margin-bottom:2.5rem;
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 20px rgba(124,58,237,0.25);
+  opacity:0;animation:fU .8s ease .2s forwards;
+  white-space:nowrap;
+}
+.bdot { width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80,0 0 20px rgba(74,222,128,.4);flex-shrink:0; }
 
 .hn { font-family:var(--fd);font-size:clamp(3rem,8vw,7.5rem);font-weight:800;line-height:1;letter-spacing:-.04em;margin-bottom:1.5rem;opacity:0;animation:fU .9s ease .35s forwards; }
 .hn .l1 { display:block;color:var(--white); }
@@ -59,14 +86,20 @@ nav {
 .hcta { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fU .9s ease .65s forwards; }
 .bp { padding:.9rem 2.2rem;background:var(--purple);color:var(--white);text-decoration:none;font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:.02em;border-radius:6px;border:1px solid var(--purple);transition:all .25s;cursor:none; }
 .bp:hover { background:var(--purple-mid);border-color:var(--purple-mid);transform:translateY(-2px);box-shadow:0 12px 40px rgba(124,58,237,.5); }
-.bo { padding:.9rem 2.2rem;background:transparent;color:var(--white);text-decoration:none;font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:.02em;border-radius:6px;border:1px solid rgba(168,85,247,.35);transition:all .25s;cursor:none; }
+.bo { padding:.9rem 2.2rem;background:transparent;color:var(--white);text-decoration:none;font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:.02em;border-radius:6px;border:1px solid rgba(168,85,247,.4);transition:all .25s;cursor:none; }
 .bo:hover { border-color:var(--purple-mid);color:var(--purple-glow);transform:translateY(-2px); }
 
-.scue { position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fI 1s ease 1.3s forwards; }
+.scue { position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fI 1s ease 1.3s forwards;z-index:2; }
 .scue span { font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted); }
 .sbar { width:1px;height:48px;background:linear-gradient(to bottom,var(--purple-mid),transparent);animation:pls 2s ease infinite; }
 
-.inner { position:relative;z-index:1; }
+/* ── SCROLLABLE SECTIONS — real background so they cover the hero ── */
+.page-body {
+  position:relative;
+  z-index:10;           /* sits above hero layer */
+  background:var(--black);
+}
+
 .abt { padding:8rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1200px;margin:0 auto; }
 .sl { font-size:.68rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--purple-mid);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem; }
 .sl::before { content:'';display:inline-block;width:28px;height:1px;background:var(--purple-mid); }
@@ -79,8 +112,21 @@ nav {
 .sn { font-family:var(--fd);font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--purple-mid),var(--purple-glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.35rem; }
 .slab { font-size:.78rem;color:var(--muted); }
 .aright { position:relative;display:flex;align-items:center;justify-content:center; }
-.msw { position:relative;width:340px;height:340px; }
+.msw { width:340px;height:340px; }
 #ms { width:100%;height:100%; }
+
+.proto-card {
+  display:flex;align-items:flex-start;gap:1rem;
+  background:rgba(124,58,237,0.08);
+  border:1px solid rgba(168,85,247,0.28);
+  border-left:3px solid var(--purple-mid);
+  border-radius:10px;
+  padding:1.25rem 1.4rem;
+  margin-top:1.5rem;
+}
+.proto-icon { font-size:1.3rem;margin-top:.1rem;flex-shrink:0;line-height:1; }
+.proto-title { font-family:var(--fd);font-size:.92rem;font-weight:700;color:var(--white);margin-bottom:.4rem;letter-spacing:-.01em; }
+.proto-text { font-size:.85rem;color:var(--muted);line-height:1.75;font-weight:300;margin:0; }
 
 .skl { padding:6rem 4rem;background:linear-gradient(180deg,transparent,rgba(61,31,122,.04),transparent); }
 .skh { text-align:center;margin-bottom:3.5rem; }
@@ -118,19 +164,17 @@ nav {
 .pd { font-size:.86rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1.4rem; }
 .ptgs { display:flex;flex-wrap:wrap;gap:.35rem; }
 .ptg { padding:.18rem .6rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;font-size:.7rem;color:var(--muted); }
-
-/* impact pill */
 .impact { display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .9rem;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:100px;font-size:.73rem;font-weight:500;color:#86efac;margin-bottom:1rem; }
 
 .ctc { padding:8rem 4rem;text-align:center;position:relative;overflow:hidden; }
 .ctc::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%);pointer-events:none; }
 .ctt { font-family:var(--fd);font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem; }
-.cs { font-size:1rem;color:var(--muted);max-width:400px;margin:0 auto 3rem;font-weight:300;line-height:1.8; }
+.cs { font-size:1rem;color:var(--muted);max-width:420px;margin:0 auto 3rem;font-weight:300;line-height:1.8; }
 .cls { display:flex;justify-content:center;gap:1rem;flex-wrap:wrap; }
 .cl { display:flex;align-items:center;gap:.55rem;padding:.7rem 1.6rem;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;color:var(--muted);text-decoration:none;font-size:.82rem;transition:all .25s;cursor:none; }
 .cl:hover { border-color:var(--purple-mid);color:var(--white);background:rgba(124,58,237,.1);transform:translateY(-2px); }
 
-footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1; }
+footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center; }
 .fc { font-size:.78rem;color:var(--muted); }
 .fc span { color:var(--purple-mid); }
 
@@ -147,7 +191,7 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   .abt{grid-template-columns:1fr;padding:5rem 1.5rem;gap:2rem;}
   .aright{display:none;}
   .skl,.exp,.prj,.ctc{padding:5rem 1.5rem;}
-  .exp{padding:5rem 1.5rem;}
+  .badge{font-size:.62rem;padding:.45rem 1rem;letter-spacing:.1em;}
 }
 </style>
 </head>
@@ -166,16 +210,19 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — self-contained, canvas stays inside this section only -->
 <section class="hero">
   <canvas id="hc"></canvas>
   <div class="hcont">
-    <div class="badge"><div class="bdot"></div>Product Manager · Gen AI · Bengaluru, India</div>
+    <div class="badge">
+      <div class="bdot"></div>
+      Associate Product Manager &nbsp;·&nbsp; Gen AI &nbsp;·&nbsp; Bengaluru, India
+    </div>
     <h1 class="hn">
-      <span class="l1">Adarsh Raj Singh</span>
+      <span class="l1">Adarsh Raj</span>
       <span class="l2">Building 0→1 Products.</span>
     </h1>
-    <p class="hd">Cross-functional PM with a track record across SaaS, healthcare, and Gen AI — turning complex workflows into intuitive, user-first product experiences.</p>
+    <p class="hd">PM with 2+ years building B2B & D2C products across SaaS, healthcare, and AI-driven workflows — with an engineering foundation and a founder's mindset.</p>
     <div class="hcta">
       <a href="#projects" class="bp">See my work</a>
       <a href="#contact" class="bo">Let's connect</a>
@@ -184,282 +231,289 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <div class="scue"><span>scroll</span><div class="sbar"></div></div>
 </section>
 
+<!-- ALL SECTIONS wrapped in .page-body — solid background, z-index above hero -->
+<div class="page-body">
+
 <!-- ABOUT -->
-<section class="inner">
-<div class="abt" id="about">
-  <div class="reveal">
-    <div class="sl">About</div>
-    <h2 class="st">Engineering roots.<br/><span class="ac">Product mindset.</span></h2>
-    <p class="at">
-      I started my career as an SDET at a high-growth D2C healthcare startup, where I learned how to build for scale, speed, and user impact. I then took an entrepreneurial leap, running a real estate and design consultancy that sharpened my customer empathy and business instincts.
-    </p>
-    <p class="at">
-      Now, as a Product Manager at Swish Club, I focus on driving 0→1 builds, simplifying complex workflows, and shipping with a user-first, data-driven approach across SaaS and Gen AI domains.
-    </p>
-    <div class="sg">
-      <div class="sc"><div class="sn">4+</div><div class="slab">Years in tech</div></div>
-      <div class="sc"><div class="sn">50+</div><div class="slab">Enterprises onboarded</div></div>
-      <div class="sc"><div class="sn">20%</div><div class="slab">Wk1 activation uplift</div></div>
-      <div class="sc"><div class="sn">3×</div><div class="slab">Platform usage growth</div></div>
+<section id="about">
+  <div class="abt">
+    <div class="reveal">
+      <div class="sl">About</div>
+      <h2 class="st">Engineer. Founder.<br/><span class="ac">Product Builder.</span></h2>
+      <p class="at">I started as an SDET at a high-growth D2C healthcare startup, building a strong foundation in scalable, user-centric systems. I then co-founded a healthy snacking brand — SnaxZero — gaining hands-on experience in 0→1 execution, GTM strategy, and deep customer understanding.</p>
+      <p class="at">Now at Swishclub as an Associate Product Manager (APM), I focus on 0→1 product development, improving activation and retention, and simplifying complex workflows for enterprise users.</p>
+      <div class="proto-card">
+        <div class="proto-icon">&#9889;</div>
+        <div>
+          <div class="proto-title">Rapid Prototyping with AI &amp; No-Code</div>
+          <p class="proto-text">I build and test product ideas through rapid prototyping using AI and no-code tools, enabling faster experimentation, early user validation, and smarter product decisions.</p>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sc"><div class="sn">40%</div><div class="slab">Activation uplift</div></div>
+        <div class="sc"><div class="sn">50+</div><div class="slab">Enterprises scaled</div></div>
+        <div class="sc"><div class="sn">32%</div><div class="slab">Growth in active users</div></div>
+        <div class="sc"><div class="sn">50+</div><div class="slab">User interviews done</div></div>
+      </div>
+    </div>
+    <div class="aright reveal">
+      <div class="msw"><canvas id="ms"></canvas></div>
     </div>
   </div>
-  <div class="aright reveal">
-    <div class="msw"><canvas id="ms"></canvas></div>
-  </div>
-</div>
 </section>
 
 <!-- SKILLS -->
-<section class="skl inner" id="skills">
+<section class="skl" id="skills">
   <div class="skh reveal">
     <div class="sl" style="justify-content:center;">Skills</div>
     <h2 class="st">What I bring <span class="ac">to the table</span></h2>
   </div>
   <div class="skg">
-    <div class="skc reveal">
-      <div class="ski">◈</div>
-      <div class="skn">Product Strategy</div>
-      <div class="tgs"><span class="tg">0→1 Product Builds</span><span class="tg">Roadmapping</span><span class="tg">OKRs</span><span class="tg">GTM Strategy</span><span class="tg">Prioritization</span><span class="tg">Vision Setting</span></div>
-    </div>
-    <div class="skc reveal">
-      <div class="ski">◉</div>
-      <div class="skn">User Research & Empathy</div>
-      <div class="tgs"><span class="tg">User Interviews</span><span class="tg">Usability Testing</span><span class="tg">Journey Mapping</span><span class="tg">Pain Point Discovery</span><span class="tg">Onboarding Design</span></div>
-    </div>
-    <div class="skc reveal">
-      <div class="ski">◇</div>
-      <div class="skn">Data & Analytics</div>
-      <div class="tgs"><span class="tg">Funnel Analysis</span><span class="tg">Activation Metrics</span><span class="tg">Cohort Analysis</span><span class="tg">A/B Testing</span><span class="tg">Firebase</span><span class="tg">Amplitude</span></div>
-    </div>
-    <div class="skc reveal">
-      <div class="ski">◬</div>
-      <div class="skn">Engineering Background</div>
-      <div class="tgs"><span class="tg">Python</span><span class="tg">Selenium</span><span class="tg">Test Automation</span><span class="tg">CI/CD</span><span class="tg">Cross-platform QA</span></div>
-    </div>
-    <div class="skc reveal">
-      <div class="ski">◫</div>
-      <div class="skn">Domains</div>
-      <div class="tgs"><span class="tg">SaaS</span><span class="tg">Gen AI</span><span class="tg">B2B & D2C</span><span class="tg">HealthTech</span><span class="tg">IT Asset Management</span><span class="tg">Fintech</span></div>
-    </div>
-    <div class="skc reveal">
-      <div class="ski">◎</div>
-      <div class="skn">Tools</div>
-      <div class="tgs"><span class="tg">Figma</span><span class="tg">Jira</span><span class="tg">Notion</span><span class="tg">Miro</span><span class="tg">Confluence</span><span class="tg">Agile / Scrum</span></div>
-    </div>
+    <div class="skc reveal"><div class="ski">◈</div><div class="skn">Product Management</div><div class="tgs"><span class="tg">PRDs</span><span class="tg">Roadmapping</span><span class="tg">0→1 Development</span><span class="tg">GTM Strategy</span><span class="tg">Stakeholder Management</span><span class="tg">Prioritization</span></div></div>
+    <div class="skc reveal"><div class="ski">◉</div><div class="skn">Growth & Experimentation</div><div class="tgs"><span class="tg">Funnel Optimization</span><span class="tg">Activation</span><span class="tg">Retention</span><span class="tg">A/B Testing</span><span class="tg">Onboarding Design</span><span class="tg">Gamification</span></div></div>
+    <div class="skc reveal"><div class="ski">◆</div><div class="skn">AI / LLM</div><div class="tgs"><span class="tg">GPT-4</span><span class="tg">Claude</span><span class="tg">Gemini</span><span class="tg">Prompt Engineering</span><span class="tg">AI Prototyping</span><span class="tg">No-Code Tools</span></div></div>
+    <div class="skc reveal"><div class="ski">◇</div><div class="skn">APIs & Integrations</div><div class="tgs"><span class="tg">Postman</span><span class="tg">HRMS Integrations</span><span class="tg">Third-party APIs</span><span class="tg">25+ HRMS Platforms</span></div></div>
+    <div class="skc reveal"><div class="ski">◬</div><div class="skn">Design & Technical</div><div class="tgs"><span class="tg">Figma</span><span class="tg">Wireframing</span><span class="tg">UX Thinking</span><span class="tg">Python</span><span class="tg">Selenium</span><span class="tg">CI/CD</span></div></div>
+    <div class="skc reveal"><div class="ski">◎</div><div class="skn">Tools & Domains</div><div class="tgs"><span class="tg">Notion</span><span class="tg">Zapier</span><span class="tg">Google Suite</span><span class="tg">SaaS</span><span class="tg">HealthTech</span><span class="tg">B2B & D2C</span></div></div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section class="exp inner" id="experience">
+<section class="exp" id="experience">
   <div class="eh reveal">
     <div class="sl">Experience</div>
     <h2 class="st">Where I've <span class="ac">built things</span></h2>
   </div>
   <div class="tl">
-
     <div class="ei reveal">
-      <div class="ep">Jan 2024 — Present · 2 yrs 3 mos</div>
-      <div class="er">Product Manager</div>
-      <div class="ec">Swish Club · Bengaluru, India</div>
+      <div class="ep">Jan 2024 — Present</div>
+      <div class="er">Associate Product Manager (APM)</div>
+      <div class="ec">Swishclub · Bengaluru, India</div>
       <ul class="epts">
-        <li>Built SwishClub's IT Asset Management platform from 0→1, simplifying the full lifecycle of IT assets from onboarding to depreciation for IT Admins and HR teams.</li>
-        <li>Grew platform usage 3× — from 5% to 15% MoM — with 100+ enterprises now managing their IT assets on the system.</li>
-        <li>Led the end-to-end product experience for the employee smartphone leasing platform, driving adoption across 50+ enterprises with 20%+ employee-to-paying-customer conversion.</li>
-        <li>Boosted Week 1 activation rate from 5% to 20% using gamified onboarding nudges, engagement tactics, and simplified user education via webinars.</li>
-        <li>Translated deep IT Admin and HR pain points into intuitive, user-friendly experiences — reducing manual work and improving data accuracy across organisations.</li>
+        <li>Owned product end-to-end — from dashboard to overall user experience across all core flows.</li>
+        <li>Managed 4–5 key user journeys used by 10K+ users/month.</li>
+        <li>Improved overall user engagement by 20%+ through continuous discovery and iterative improvements.</li>
+        <li>Reduced drop-offs across core flows by 25–30% by identifying friction points and simplifying user effort.</li>
+        <li>Shipped 6+ features from idea to launch in close collaboration with design and engineering teams.</li>
+        <li>Improved usability by simplifying flows, cutting unnecessary steps, and reducing cognitive load for users.</li>
+        <li>Built India's first employee smartphone leasing platform — Week 1 activation from 5% → 20% via gamified nudges and contextual CTAs.</li>
+        <li>Scaled platform to 50+ enterprises including FamPay, StoneX, Zaggle, ClearTax, and Reliance Jio.</li>
+        <li>Led integrations with 25+ HRMS platforms, enabling seamless onboarding and automated eligibility checks.</li>
       </ul>
     </div>
-
     <div class="ei reveal">
-      <div class="ep">Mar 2022 — Jul 2023 · 1 yr 5 mos</div>
-      <div class="er">SDET-2</div>
-      <div class="ec">Mojocare · HealthTech</div>
+      <div class="ep">Aug 2023 — Dec 2023</div>
+      <div class="er">Co-Founder</div>
+      <div class="ec">SnaxZero · Chennai, India</div>
       <ul class="epts">
-        <li>Built and maintained automated test suites in Python + Selenium for web and mobile applications, dramatically improving testing efficiency and coverage.</li>
-        <li>Managed and mentored a team of 3 QA engineers, providing technical guidance and ensuring adherence to quality best practices.</li>
-        <li>Integrated automated testing into CI/CD pipelines, enabling faster release cycles across sexual wellness, women's health, mental wellness, and hair care products.</li>
-        <li>Executed comprehensive functional, regression, and performance testing across multiple platforms including mobile apps and internal dashboards.</li>
+        <li>Built a healthy snacking brand from 0→1, focusing on B2B distribution and white-label manufacturing.</li>
+        <li>Secured and fulfilled bulk B2B orders by identifying demand gaps and managing supplier relationships.</li>
+        <li>Led GTM efforts including pricing strategy, packaging design, and partner onboarding.</li>
       </ul>
     </div>
-
     <div class="ei reveal">
-      <div class="ep">Jul 2019 — Jan 2022 · 2 yrs 7 mos</div>
+      <div class="ep">May 2022 — Jul 2023</div>
+      <div class="er">SDET</div>
+      <div class="ec">MojoCare · Bengaluru, India</div>
+      <ul class="epts">
+        <li>Built automated test frameworks using Python and Selenium, improving test coverage and reducing manual effort.</li>
+        <li>Integrated automated testing into CI/CD pipelines, enabling faster and more reliable release cycles.</li>
+        <li>Performed cross-platform testing across web and mobile ensuring consistent UX and product stability.</li>
+      </ul>
+    </div>
+    <div class="ei reveal">
+      <div class="ep">Jul 2019 — Jan 2022</div>
       <div class="er">Senior Software Test Engineer</div>
       <div class="ec">Dollop Infotech · Indore, India</div>
       <ul class="epts">
-        <li>Started career in software quality engineering, building a strong foundation in cross-platform testing, test strategy, and engineering rigour.</li>
+        <li>Built a strong foundation in cross-platform testing, test strategy, and software quality engineering.</li>
         <li>Delivered reliable, high-quality software across client products in a fast-paced consulting environment.</li>
       </ul>
     </div>
-
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="prj inner" id="projects">
+<section class="prj" id="projects">
   <div class="ph reveal">
     <div class="sl">Projects</div>
     <h2 class="st">Work I'm <span class="ac">proud of</span></h2>
   </div>
   <div class="pg">
-
     <div class="pc reveal">
       <div class="pnum">01 —</div>
       <div class="pt">IT Asset Management Platform</div>
-      <div class="impact">↑ 5% → 15% MoM usage growth · 100+ enterprises</div>
-      <p class="pd">Built Swish Club's IT Asset Management product from scratch. Spent time in the field understanding IT Admin and HR pain points, then translated those insights into a streamlined, intuitive lifecycle management system — from asset onboarding, bulk upload, assignment, to depreciation.</p>
-      <div class="ptgs"><span class="ptg">0→1</span><span class="ptg">SaaS</span><span class="ptg">B2B</span><span class="ptg">IT Admin</span><span class="ptg">Process Simplification</span></div>
+      <div class="impact">↑ 32% active users · 15+ enterprise partnerships</div>
+      <p class="pd">Built Swishclub's IT Asset Management product from 0→1. Deep discovery with IT Admins and HR teams translated into a streamlined lifecycle system — from onboarding and bulk upload to assignment and depreciation. Reduced manual effort by 20+ hrs/week.</p>
+      <div class="ptgs"><span class="ptg">0→1</span><span class="ptg">SaaS</span><span class="ptg">B2B</span><span class="ptg">IT Admin</span><span class="ptg">Process Design</span></div>
     </div>
-
     <div class="pc reveal">
       <div class="pnum">02 —</div>
       <div class="pt">Employee Smartphone Leasing</div>
-      <div class="impact">↑ Wk1 activation 5% → 20% · 50+ enterprises</div>
-      <p class="pd">Led the full product experience for Swish Club's tax-saving smartphone leasing platform for salaried employees. Designed gamified onboarding nudges and simplified user education via webinars — driving 20%+ conversion from sign-up to paying customer and significant revenue impact.</p>
-      <div class="ptgs"><span class="ptg">Growth</span><span class="ptg">Fintech</span><span class="ptg">Onboarding</span><span class="ptg">Gamification</span><span class="ptg">D2C</span></div>
+      <div class="impact">↑ Activation 5% → 20% · 50+ enterprises · 25+ HRMS integrations</div>
+      <p class="pd">India's first employee smartphone leasing platform for tax-saving device access. Redesigned onboarding with gamified nudges — drove 20%+ employee-to-paid conversion across marquee enterprises including FamPay, Reliance Jio, ClearTax, and Zaggle.</p>
+      <div class="ptgs"><span class="ptg">Growth</span><span class="ptg">Fintech</span><span class="ptg">Onboarding</span><span class="ptg">Integrations</span><span class="ptg">D2C</span></div>
     </div>
-
     <div class="pc reveal">
       <div class="pnum">03 —</div>
-      <div class="pt">QA Automation at Mojocare</div>
-      <div class="impact">Team of 3 · Full CI/CD integration</div>
-      <p class="pd">Designed and owned the end-to-end test automation strategy at Mojocare — a high-growth D2C health startup. Built Python + Selenium suites, mentored a team of 3 engineers, and integrated automated testing into CI/CD pipelines enabling faster, more reliable releases across 4 health verticals.</p>
-      <div class="ptgs"><span class="ptg">Test Automation</span><span class="ptg">HealthTech</span><span class="ptg">Python</span><span class="ptg">CI/CD</span><span class="ptg">Team Leadership</span></div>
+      <div class="pt">SnaxZero — Healthy Snacking Brand</div>
+      <div class="impact">0→1 · B2B Distribution · GTM Execution</div>
+      <p class="pd">Co-founded a healthy snacking brand from scratch. Identified demand gaps, secured B2B bulk orders, managed supplier relationships, and led end-to-end GTM including pricing, packaging, and partner onboarding in under 5 months.</p>
+      <div class="ptgs"><span class="ptg">Co-Founder</span><span class="ptg">0→1</span><span class="ptg">B2B</span><span class="ptg">GTM</span></div>
     </div>
-
+    <div class="pc reveal">
+      <div class="pnum">04 —</div>
+      <div class="pt">AI-Assisted Product Workflows</div>
+      <div class="impact">LLM Prototyping · Workflow Automation</div>
+      <p class="pd">Ongoing exploration using GPT-4, Claude, and Gemini for LLM-based prototyping, prompt engineering, and workflow automation — accelerating experimentation, reducing manual decision loops, and improving internal efficiency at Swishclub.</p>
+      <div class="ptgs"><span class="ptg">Gen AI</span><span class="ptg">LLM</span><span class="ptg">Prompt Engineering</span><span class="ptg">Automation</span></div>
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="ctc inner" id="contact">
+<section class="ctc" id="contact">
   <div class="reveal">
     <div class="sl" style="justify-content:center;">Contact</div>
     <h2 class="ctt">Let's build<br/><span style="background:linear-gradient(135deg,var(--purple-mid),var(--purple-glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">something great.</span></h2>
-    <p class="cs">Open to new PM opportunities, collaborations, and conversations about product, Gen AI, and building 0→1.</p>
+    <p class="cs">Open to APM / PM roles, Gen AI product collaborations, and conversations about building 0→1 in SaaS or AI-driven spaces.</p>
     <div class="cls">
       <a href="mailto:rajadarsh706@gmail.com" class="cl">✉ rajadarsh706@gmail.com</a>
-      <a href="https://www.linkedin.com/in/adarsh-rajsingh-4352a4134" class="cl" target="_blank">in LinkedIn</a>
+      <a href="https://linkedin.com/in/adarsh-raj-singh-4352a4134" class="cl" target="_blank">in LinkedIn</a>
       <a href="tel:+918608058365" class="cl">📞 +91 86080 58365</a>
-      <a href="https://swishclub.in" class="cl" target="_blank">↗ swishclub.in</a>
+      <a href="https://swishx.com/" class="cl" target="_blank">↗ swishx.com</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="fc">© 2025 Adarsh Raj Singh. Bengaluru, India.</div>
+  <div class="fc">© 2025 Adarsh Raj. Bengaluru, India.</div>
   <div class="fc">Built with <span>♥</span> and a product mindset</div>
 </footer>
 
+</div><!-- end .page-body -->
+
 <script>
-// ─── HERO CANVAS: Stars + 3D Wireframe Sphere ───
+/* ── HERO CANVAS ── */
 const hc = document.getElementById('hc');
 const hx = hc.getContext('2d');
-let HW, HH, mx = -9999, my = -9999, T = 0;
-function rsH() { HW = hc.width = hc.offsetWidth; HH = hc.height = hc.offsetHeight; }
-rsH(); window.addEventListener('resize', rsH);
-window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+let HW, HH, MX=-9999, MY=-9999;
 
-let stars = [];
-function mkStars() {
-  stars = [];
-  const n = Math.floor(HW * HH / 1800);
-  for (let i = 0; i < n; i++) {
-    stars.push({
-      x: Math.random()*HW, y: Math.random()*HH,
-      r: Math.random()*1.3+.15,
-      a: Math.random()*.75+.1,
-      tp: Math.random()*Math.PI*2,
-      ts: Math.random()*.018+.004,
-      vx:(Math.random()-.5)*.05, vy:(Math.random()-.5)*.05,
-    });
-  }
+function rsH(){
+  HW = hc.width  = hc.offsetWidth;
+  HH = hc.height = hc.offsetHeight;
 }
-mkStars(); window.addEventListener('resize', mkStars);
+rsH();
+window.addEventListener('resize', rsH);
+window.addEventListener('mousemove', e => { MX=e.clientX; MY=e.clientY; });
 
-function mkSphPts(lat, lng) {
-  const pts = [];
-  for (let i=0;i<=lat;i++) {
+/* Stars */
+let stars=[];
+function mkStars(){
+  stars=[];
+  const n=Math.floor(HW*HH/1800);
+  for(let i=0;i<n;i++) stars.push({
+    x:Math.random()*HW, y:Math.random()*HH,
+    r:Math.random()*1.3+.15,
+    a:Math.random()*.75+.1,
+    tp:Math.random()*Math.PI*2,
+    ts:Math.random()*.018+.004,
+    vx:(Math.random()-.5)*.05,
+    vy:(Math.random()-.5)*.05,
+  });
+}
+mkStars();
+window.addEventListener('resize', mkStars);
+
+/* Sphere */
+function mkSphPts(lat,lng){
+  const pts=[];
+  for(let i=0;i<=lat;i++){
     const th=(i/lat)*Math.PI;
-    for (let j=0;j<=lng;j++) {
+    for(let j=0;j<=lng;j++){
       const ph=(j/lng)*Math.PI*2;
       pts.push({x:Math.sin(th)*Math.cos(ph),y:Math.cos(th),z:Math.sin(th)*Math.sin(ph)});
     }
   }
   return pts;
 }
-
-function proj(pt, rx, ry, cx, cy, r) {
+function proj3d(pt,rx,ry,cx,cy,r){
   let x=pt.x*Math.cos(ry)-pt.z*Math.sin(ry);
   let z=pt.x*Math.sin(ry)+pt.z*Math.cos(ry);
   let y2=pt.y*Math.cos(rx)-z*Math.sin(rx);
   let z2=pt.y*Math.sin(rx)+z*Math.cos(rx);
-  const f=3/(3+z2),s=f;
-  return {sx:cx+x*r*s,sy:cy+y2*r*s,z2,s,vis:z2<0.92};
+  const f=3/(3+z2);
+  return{sx:cx+x*r*f,sy:cy+y2*r*f,z2,s:f,vis:z2<0.92};
 }
-
 const SPH={pts:mkSphPts(14,22),rx:.2,ry:0,lat:14,lng:22};
 const dust=Array.from({length:60},()=>({
   x:Math.random(),y:Math.random(),
-  r:Math.random()*1+.2, a:Math.random()*.3+.03,
+  r:Math.random()*1+.2,a:Math.random()*.3+.03,
   vx:(Math.random()-.5)*.00012,vy:(Math.random()-.5)*.00012,
   c:Math.random()<.65?'168,85,247':'220,200,255',
 }));
 
-function drawHero() {
+function drawHero(){
   hx.clearRect(0,0,HW,HH);
   const bg=hx.createRadialGradient(HW*.5,HH*.45,0,HW*.5,HH*.5,HH*.9);
-  bg.addColorStop(0,'rgba(28,8,58,0.97)');bg.addColorStop(.4,'rgba(14,4,34,0.95)');bg.addColorStop(1,'rgba(2,2,4,1)');
-  hx.fillStyle=bg;hx.fillRect(0,0,HW,HH);
-  T+=.016;
+  bg.addColorStop(0,'rgba(28,8,58,0.97)');
+  bg.addColorStop(.4,'rgba(14,4,34,0.95)');
+  bg.addColorStop(1,'rgba(2,2,4,1)');
+  hx.fillStyle=bg; hx.fillRect(0,0,HW,HH);
+
   for(const s of stars){
-    s.tp+=s.ts;const a=s.a*(0.55+0.45*Math.sin(s.tp));
-    s.x+=s.vx;s.y+=s.vy;
-    if(s.x<0)s.x=HW;if(s.x>HW)s.x=0;if(s.y<0)s.y=HH;if(s.y>HH)s.y=0;
-    hx.beginPath();hx.arc(s.x,s.y,s.r,0,Math.PI*2);hx.fillStyle=`rgba(255,255,255,${a})`;hx.fill();
+    s.tp+=s.ts; const a=s.a*(0.55+0.45*Math.sin(s.tp));
+    s.x+=s.vx; s.y+=s.vy;
+    if(s.x<0)s.x=HW; if(s.x>HW)s.x=0; if(s.y<0)s.y=HH; if(s.y>HH)s.y=0;
+    hx.beginPath(); hx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    hx.fillStyle=`rgba(255,255,255,${a})`; hx.fill();
   }
   for(const d of dust){
-    d.x+=d.vx;d.y+=d.vy;
-    if(d.x<0)d.x=1;if(d.x>1)d.x=0;if(d.y<0)d.y=1;if(d.y>1)d.y=0;
-    hx.beginPath();hx.arc(d.x*HW,d.y*HH,d.r,0,Math.PI*2);hx.fillStyle=`rgba(${d.c},${d.a})`;hx.fill();
+    d.x+=d.vx; d.y+=d.vy;
+    if(d.x<0)d.x=1; if(d.x>1)d.x=0; if(d.y<0)d.y=1; if(d.y>1)d.y=0;
+    hx.beginPath(); hx.arc(d.x*HW,d.y*HH,d.r,0,Math.PI*2);
+    hx.fillStyle=`rgba(${d.c},${d.a})`; hx.fill();
   }
-  const R=Math.min(HW,HH)*.31,cx=HW*.5,cy=HH*.5;
-  SPH.ry+=.0015;SPH.rx+=.0007;
-  const mxf=((mx/HW)-.5)*.14,myf=((my/HH)-.5)*.12;
-  const rxA=SPH.rx+myf,ryA=SPH.ry+mxf;
-  const p=SPH.pts.map(pt=>proj(pt,rxA,ryA,cx,cy,R));
+
+  const R=Math.min(HW,HH)*.31, cx=HW*.5, cy=HH*.5;
+  SPH.ry+=.0015; SPH.rx+=.0007;
+  const mxf=((MX/HW)-.5)*.14, myf=((MY/HH)-.5)*.12;
+  const p=SPH.pts.map(pt=>proj3d(pt,SPH.rx+myf,SPH.ry+mxf,cx,cy,R));
   const L1=SPH.lng+1;
+
   for(let i=0;i<=SPH.lat;i++){
-    hx.beginPath();let go=false;
+    hx.beginPath(); let go=false;
     for(let j=0;j<=SPH.lng;j++){const pt=p[i*L1+j];if(!pt.vis)continue;if(!go){hx.moveTo(pt.sx,pt.sy);go=true;}else hx.lineTo(pt.sx,pt.sy);}
     if(go){const d=1-(i/SPH.lat);hx.strokeStyle=`rgba(160,100,255,${.1+.2*d})`;hx.lineWidth=.65;hx.stroke();}
   }
   for(let j=0;j<=SPH.lng;j++){
-    hx.beginPath();let go=false;
+    hx.beginPath(); let go=false;
     for(let i=0;i<=SPH.lat;i++){const pt=p[i*L1+j];if(!pt.vis)continue;if(!go){hx.moveTo(pt.sx,pt.sy);go=true;}else hx.lineTo(pt.sx,pt.sy);}
     if(go){hx.strokeStyle='rgba(130,75,235,0.13)';hx.lineWidth=.65;hx.stroke();}
   }
   for(const pt of p){
-    if(!pt.vis)continue;const g=Math.max(0,1-(pt.z2+1)/2*1.35);if(g<.04)continue;
-    hx.beginPath();hx.arc(pt.sx,pt.sy,pt.s*.95,0,Math.PI*2);hx.fillStyle=`rgba(210,150,255,${g*.6})`;hx.fill();
+    if(!pt.vis)continue; const g=Math.max(0,1-(pt.z2+1)/2*1.35); if(g<.04)continue;
+    hx.beginPath(); hx.arc(pt.sx,pt.sy,pt.s*.95,0,Math.PI*2);
+    hx.fillStyle=`rgba(210,150,255,${g*.6})`; hx.fill();
   }
   const gl=hx.createRadialGradient(cx,cy,R*.25,cx,cy,R*1.35);
-  gl.addColorStop(0,'rgba(90,50,190,0.22)');gl.addColorStop(.55,'rgba(70,35,170,0.1)');gl.addColorStop(1,'rgba(0,0,0,0)');
-  hx.fillStyle=gl;hx.beginPath();hx.arc(cx,cy,R*1.35,0,Math.PI*2);hx.fill();
+  gl.addColorStop(0,'rgba(90,50,190,0.22)'); gl.addColorStop(.55,'rgba(70,35,170,0.1)'); gl.addColorStop(1,'rgba(0,0,0,0)');
+  hx.fillStyle=gl; hx.beginPath(); hx.arc(cx,cy,R*1.35,0,Math.PI*2); hx.fill();
+
   requestAnimationFrame(drawHero);
 }
 drawHero();
 
-// ─── MINI SPHERE ───
-const mc=document.getElementById('ms');
-const mx2=mc.getContext('2d');
+/* ── MINI SPHERE ── */
+const mc=document.getElementById('ms'), mx2=mc.getContext('2d');
 let MW=0,MH=0;
 function rsM(){MW=mc.width=mc.offsetWidth;MH=mc.height=mc.offsetHeight;}
-rsM();window.addEventListener('resize',rsM);
+rsM(); window.addEventListener('resize',rsM);
 const MS={pts:mkSphPts(12,18),rx:.3,ry:0,lat:12,lng:18};
 function drawMini(){
-  mx2.clearRect(0,0,MW,MH);MS.ry+=.003;MS.rx+=.001;
+  mx2.clearRect(0,0,MW,MH); MS.ry+=.003; MS.rx+=.001;
   const R=MW*.38,cx=MW/2,cy=MH/2;
-  const p=MS.pts.map(pt=>proj(pt,MS.rx,MS.ry,cx,cy,R));
+  const p=MS.pts.map(pt=>proj3d(pt,MS.rx,MS.ry,cx,cy,R));
   const L1=MS.lng+1;
   for(let i=0;i<=MS.lat;i++){mx2.beginPath();let go=false;for(let j=0;j<=MS.lng;j++){const pt=p[i*L1+j];if(!pt.vis)continue;if(!go){mx2.moveTo(pt.sx,pt.sy);go=true;}else mx2.lineTo(pt.sx,pt.sy);}if(go){mx2.strokeStyle='rgba(168,85,247,0.3)';mx2.lineWidth=.7;mx2.stroke();}}
   for(let j=0;j<=MS.lng;j++){mx2.beginPath();let go=false;for(let i=0;i<=MS.lat;i++){const pt=p[i*L1+j];if(!pt.vis)continue;if(!go){mx2.moveTo(pt.sx,pt.sy);go=true;}else mx2.lineTo(pt.sx,pt.sy);}if(go){mx2.strokeStyle='rgba(124,58,237,0.2)';mx2.lineWidth=.7;mx2.stroke();}}
@@ -469,20 +523,39 @@ function drawMini(){
 }
 drawMini();
 
-// ─── CURSOR ───
-const cur=document.getElementById('cur');const curR=document.getElementById('cur-r');
-document.addEventListener('mousemove',e=>{cur.style.left=(e.clientX-5)+'px';cur.style.top=(e.clientY-5)+'px';curR.style.left=(e.clientX-18)+'px';curR.style.top=(e.clientY-18)+'px';});
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=(e.clientX-5)+'px'; cur.style.top=(e.clientY-5)+'px';
+  curR.style.left=(e.clientX-18)+'px'; curR.style.top=(e.clientY-18)+'px';
+});
 document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';curR.style.borderColor='rgba(168,85,247,.9)';});
   el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';curR.style.borderColor='rgba(168,85,247,.5)';});
 });
 
-// ─── REVEAL ───
-const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*55);obs.unobserve(e.target);}});},{threshold:.08});
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*55);obs.unobserve(e.target);}});
+},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// ─── NAV ───
-window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>40?'rgba(2,2,4,0.92)':'rgba(2,2,4,0.5)';});
+/* ── NAV ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.background=window.scrollY>40?'rgba(2,2,4,0.92)':'rgba(2,2,4,0.5)';
+});
+
+/* ── SMOOTH NAV LINKS — offset for fixed nav height ── */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const navH = document.getElementById('nav').offsetHeight;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
 </script>
 </body>
 </html>
