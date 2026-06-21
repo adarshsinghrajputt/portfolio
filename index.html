@@ -61,6 +61,12 @@ nav {
 .bp:hover { background:var(--purple-mid);border-color:var(--purple-mid);transform:translateY(-2px);box-shadow:0 12px 40px rgba(124,58,237,.5); }
 .bo { padding:.9rem 2.2rem;background:transparent;color:var(--white);text-decoration:none;font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:.02em;border-radius:6px;border:1px solid rgba(168,85,247,.35);transition:all .25s;cursor:none; }
 .bo:hover { border-color:var(--purple-mid);color:var(--purple-glow);transform:translateY(-2px); }
+.bd { padding:.9rem 2.2rem;background:transparent;color:var(--white);text-decoration:none;font-family:var(--fd);font-weight:700;font-size:.88rem;letter-spacing:.02em;border-radius:6px;border:1px solid rgba(168,85,247,.35);transition:all .25s;cursor:none;display:flex;align-items:center;gap:.55rem; }
+.bd:hover { border-color:var(--purple-mid);color:var(--purple-glow);background:rgba(124,58,237,.08);transform:translateY(-2px); }
+.bd svg { transition:transform .25s; }
+.bd:hover svg { transform:translateY(2px); }
+.bd.done { border-color:#4ade80;color:#86efac;background:rgba(74,222,128,.07); }
+.bd.done svg { transform:none; }
 
 .scue { position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fI 1s ease 1.3s forwards; }
 .scue span { font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted); }
@@ -106,21 +112,29 @@ nav {
 .epts li { font-size:.88rem;color:var(--muted);padding-left:1.1rem;position:relative;font-weight:300;line-height:1.65;margin-bottom:.4rem; }
 .epts li::before { content:'—';position:absolute;left:0;color:var(--purple-mid); }
 
-.prj { padding:6rem 4rem; }
-.ph { margin-bottom:3.5rem; }
-.pg { display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.25rem;max-width:1100px;margin:0 auto; }
-.pc { background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all .35s;cursor:none;position:relative;overflow:hidden; }
-.pc::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-glow));transform:scaleX(0);transition:transform .4s; }
-.pc:hover::before { transform:scaleX(1); }
-.pc:hover { border-color:var(--border-strong);transform:translateY(-6px);box-shadow:0 24px 60px rgba(124,58,237,.15); }
-.pnum { font-family:var(--fd);font-size:.68rem;font-weight:800;letter-spacing:.2em;color:var(--purple-mid);margin-bottom:.9rem; }
-.pt { font-family:var(--fd);font-size:1.15rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.7rem;line-height:1.2; }
-.pd { font-size:.86rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1.4rem; }
-.ptgs { display:flex;flex-wrap:wrap;gap:.35rem; }
-.ptg { padding:.18rem .6rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;font-size:.7rem;color:var(--muted); }
-
-/* impact pill */
-.impact { display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .9rem;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:100px;font-size:.73rem;font-weight:500;color:#86efac;margin-bottom:1rem; }
+/* ─── WORK / CASE STUDIES ─── */
+.work { padding:6rem 4rem 8rem; }
+.work-label { font-family:var(--fd);font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--white);margin-bottom:.55rem; }
+.work-rule { width:44px;height:3px;background:var(--purple-mid);border-radius:2px;margin-bottom:3rem; }
+.work-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto; }
+.wcard { display:block;text-decoration:none;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);background:var(--card-bg);transition:transform .35s cubic-bezier(.25,.46,.45,.94),border-color .35s,box-shadow .35s;cursor:none; }
+.wcard:hover { transform:translateY(-7px);border-color:rgba(168,85,247,.28);box-shadow:0 28px 72px rgba(0,0,0,.55); }
+.wcard-cover { aspect-ratio:16/10;position:relative;overflow:hidden; }
+.wcard-cover-bg { position:absolute;inset:0;transition:transform .55s cubic-bezier(.25,.46,.45,.94); }
+.wcard:hover .wcard-cover-bg { transform:scale(1.05); }
+.wcard-dots { position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:20px 20px;pointer-events:none; }
+.wcard-badge { position:absolute;top:1rem;left:1rem;font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(0,0,0,.4);padding:.25rem .75rem;border-radius:100px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1); }
+.wcard-yr { position:absolute;top:1rem;right:1rem;font-size:.62rem;color:rgba(255,255,255,.32);font-weight:500; }
+.wcard-grd { position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(10,10,18,1) 0%,transparent 100%);pointer-events:none; }
+.wcard-name { position:absolute;bottom:1rem;left:1.25rem;right:1rem;font-family:var(--fd);font-size:1.05rem;font-weight:800;color:var(--white);letter-spacing:-.02em;line-height:1.25; }
+.wcard-foot { padding:.9rem 1.25rem 1.1rem;border-top:1px solid rgba(255,255,255,.05); }
+.wcard-tags { display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.65rem; }
+.wcard-tag { padding:.18rem .65rem;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.22);border-radius:100px;font-size:.64rem;color:var(--purple-glow); }
+.wcard-cta { font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;transition:color .2s; }
+.wcard-cta svg { transition:transform .2s; }
+.wcard:hover .wcard-cta { color:var(--purple-mid); }
+.wcard:hover .wcard-cta svg { transform:translateX(3px); }
+.wcard-soon { opacity:.4;pointer-events:none;cursor:default; }
 
 .ctc { padding:8rem 4rem;text-align:center;position:relative;overflow:hidden; }
 .ctc::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%);pointer-events:none; }
@@ -146,7 +160,8 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   .nm{display:none;}
   .abt{grid-template-columns:1fr;padding:5rem 1.5rem;gap:2rem;}
   .aright{display:none;}
-  .skl,.exp,.prj,.ctc{padding:5rem 1.5rem;}
+  .skl,.exp,.ctc,.work{padding:5rem 1.5rem;}
+  .work-grid{grid-template-columns:1fr;gap:1rem;}
   .exp{padding:5rem 1.5rem;}
 }
 </style>
@@ -161,8 +176,9 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#projects">Case Studies</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="Adarsh_resume.pdf" download="Adarsh_Raj_Resume.pdf" style="color:var(--white);border:1px solid rgba(168,85,247,.3);padding:.35rem .9rem;border-radius:4px;transition:all .2s;" onmouseover="this.style.background='rgba(124,58,237,.12)';this.style.color='var(--white)'" onmouseout="this.style.background='transparent';this.style.color='var(--white)'">Resume ↓</a></li>
   </ul>
 </nav>
 
@@ -170,15 +186,19 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
 <section class="hero">
   <canvas id="hc"></canvas>
   <div class="hcont">
-    <div class="badge"><div class="bdot"></div>Product Manager · Gen AI · Bengaluru, India</div>
+    <div class="badge"><div class="bdot"></div>Product Manager · Pharma & Fintech · Bengaluru, India</div>
     <h1 class="hn">
-      <span class="l1">Adarsh Raj Singh</span>
+      <span class="l1">Adarsh Raj</span>
       <span class="l2">Building 0→1 Products.</span>
     </h1>
-    <p class="hd">Cross-functional PM with a track record across SaaS, healthcare, and Gen AI — turning complex workflows into intuitive, user-first product experiences.</p>
+    <p class="hd">PM with 2.5+ years building workflow-intensive products across fintech, pharma, healthcare, and employee benefits — from operational systems to fulfillment workflows and AI-assisted product discovery.</p>
     <div class="hcta">
       <a href="#projects" class="bp">See my work</a>
       <a href="#contact" class="bo">Let's connect</a>
+      <a href="Adarsh_resume.pdf" download="Adarsh_Raj_Resume.pdf" class="bd" id="dlBtn">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 1v9m0 0L4.5 7m3 3L10.5 7M2 13h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download Resume
+      </a>
     </div>
   </div>
   <div class="scue"><span>scroll</span><div class="sbar"></div></div>
@@ -191,16 +211,16 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
     <div class="sl">About</div>
     <h2 class="st">Engineering roots.<br/><span class="ac">Product mindset.</span></h2>
     <p class="at">
-      I started my career as an SDET at a high-growth D2C healthcare startup, where I learned how to build for scale, speed, and user impact. I then took an entrepreneurial leap, running a real estate and design consultancy that sharpened my customer empathy and business instincts.
+      I started as an SDET, building test automation frameworks and integrating them into CI/CD pipelines at scale. That technical foundation led me to product — where I took the entrepreneurial leap of co-founding SnaxZero before moving into full-time PM roles.
     </p>
     <p class="at">
-      Now, as a Product Manager at Swish Club, I focus on driving 0→1 builds, simplifying complex workflows, and shipping with a user-first, data-driven approach across SaaS and Gen AI domains.
+      Today at SwishX, I lead a pharma channel intelligence platform — building inventory visibility, claims processing, rewards fulfillment, and CXO dashboards that serve 5,600+ distributors and 14,733+ retailers in real time.
     </p>
     <div class="sg">
-      <div class="sc"><div class="sn">4+</div><div class="slab">Years in tech</div></div>
-      <div class="sc"><div class="sn">50+</div><div class="slab">Enterprises onboarded</div></div>
-      <div class="sc"><div class="sn">20%</div><div class="slab">Wk1 activation uplift</div></div>
-      <div class="sc"><div class="sn">3×</div><div class="slab">Platform usage growth</div></div>
+      <div class="sc"><div class="sn">2.5+</div><div class="slab">Years as PM</div></div>
+      <div class="sc"><div class="sn">14.7K+</div><div class="slab">Retailers enabled</div></div>
+      <div class="sc"><div class="sn">25%</div><div class="slab">Field force productivity up</div></div>
+      <div class="sc"><div class="sn">7→1</div><div class="slab">Days to 24hr claim TAT</div></div>
     </div>
   </div>
   <div class="aright reveal">
@@ -218,33 +238,33 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <div class="skg">
     <div class="skc reveal">
       <div class="ski">◈</div>
-      <div class="skn">Product Strategy</div>
-      <div class="tgs"><span class="tg">0→1 Product Builds</span><span class="tg">Roadmapping</span><span class="tg">OKRs</span><span class="tg">GTM Strategy</span><span class="tg">Prioritization</span><span class="tg">Vision Setting</span></div>
+      <div class="skn">Product Management</div>
+      <div class="tgs"><span class="tg">Product Strategy</span><span class="tg">Product Discovery</span><span class="tg">Roadmapping</span><span class="tg">PRDs</span><span class="tg">0→1 Development</span><span class="tg">Stakeholder Management</span><span class="tg">GTM Strategy</span></div>
     </div>
     <div class="skc reveal">
       <div class="ski">◉</div>
-      <div class="skn">User Research & Empathy</div>
-      <div class="tgs"><span class="tg">User Interviews</span><span class="tg">Usability Testing</span><span class="tg">Journey Mapping</span><span class="tg">Pain Point Discovery</span><span class="tg">Onboarding Design</span></div>
+      <div class="skn">Growth & Analytics</div>
+      <div class="tgs"><span class="tg">Activation</span><span class="tg">Retention</span><span class="tg">Experimentation</span><span class="tg">User Research</span><span class="tg">Product Analytics</span></div>
     </div>
     <div class="skc reveal">
       <div class="ski">◇</div>
-      <div class="skn">Data & Analytics</div>
-      <div class="tgs"><span class="tg">Funnel Analysis</span><span class="tg">Activation Metrics</span><span class="tg">Cohort Analysis</span><span class="tg">A/B Testing</span><span class="tg">Firebase</span><span class="tg">Amplitude</span></div>
+      <div class="skn">AI & Automation</div>
+      <div class="tgs"><span class="tg">GPT-4</span><span class="tg">Claude Opus 4.6</span><span class="tg">Gemini</span><span class="tg">Prompt Engineering</span><span class="tg">AI Feature Prototyping</span><span class="tg">Workflow Automation</span></div>
     </div>
     <div class="skc reveal">
       <div class="ski">◬</div>
-      <div class="skn">Engineering Background</div>
-      <div class="tgs"><span class="tg">Python</span><span class="tg">Selenium</span><span class="tg">Test Automation</span><span class="tg">CI/CD</span><span class="tg">Cross-platform QA</span></div>
+      <div class="skn">Integrations & APIs</div>
+      <div class="tgs"><span class="tg">Postman</span><span class="tg">API Testing</span><span class="tg">HRMS Integrations</span><span class="tg">Third-Party Integrations</span></div>
     </div>
     <div class="skc reveal">
       <div class="ski">◫</div>
-      <div class="skn">Domains</div>
-      <div class="tgs"><span class="tg">SaaS</span><span class="tg">Gen AI</span><span class="tg">B2B & D2C</span><span class="tg">HealthTech</span><span class="tg">IT Asset Management</span><span class="tg">Fintech</span></div>
+      <div class="skn">Design & Tools</div>
+      <div class="tgs"><span class="tg">Figma</span><span class="tg">Wireframing</span><span class="tg">Notion</span></div>
     </div>
     <div class="skc reveal">
       <div class="ski">◎</div>
-      <div class="skn">Tools</div>
-      <div class="tgs"><span class="tg">Figma</span><span class="tg">Jira</span><span class="tg">Notion</span><span class="tg">Miro</span><span class="tg">Confluence</span><span class="tg">Agile / Scrum</span></div>
+      <div class="skn">Technical</div>
+      <div class="tgs"><span class="tg">Python</span><span class="tg">Selenium</span><span class="tg">Test Automation</span><span class="tg">CI/CD</span><span class="tg">System Integrations</span></div>
     </div>
   </div>
 </section>
@@ -258,76 +278,138 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <div class="tl">
 
     <div class="ei reveal">
-      <div class="ep">Jan 2024 — Present · 2 yrs 3 mos</div>
+      <div class="ep">Jan 2026 — Present</div>
       <div class="er">Product Manager</div>
-      <div class="ec">Swish Club · Bengaluru, India</div>
+      <div class="ec">SwishX · Bengaluru, India</div>
       <ul class="epts">
-        <li>Built SwishClub's IT Asset Management platform from 0→1, simplifying the full lifecycle of IT assets from onboarding to depreciation for IT Admins and HR teams.</li>
-        <li>Grew platform usage 3× — from 5% to 15% MoM — with 100+ enterprises now managing their IT assets on the system.</li>
-        <li>Led the end-to-end product experience for the employee smartphone leasing platform, driving adoption across 50+ enterprises with 20%+ employee-to-paying-customer conversion.</li>
-        <li>Boosted Week 1 activation rate from 5% to 20% using gamified onboarding nudges, engagement tactics, and simplified user education via webinars.</li>
-        <li>Translated deep IT Admin and HR pain points into intuitive, user-friendly experiences — reducing manual work and improving data accuracy across organisations.</li>
+        <li>Leading product strategy for a pharma channel intelligence platform with real-time visibility across distributors, retailers, field reps, and healthcare partners.</li>
+        <li>Built inventory visibility, claims processing, rewards fulfillment, and partner management workflows across 5,600+ distributors and 14,733+ retailers.</li>
+        <li>Increased field force productivity by 25% through mobile-first workflows and streamlined sales execution processes.</li>
+        <li>Reduced claim fulfillment TAT from 7 days to under 24 hours via workflow automation, approval orchestration, and exception handling.</li>
+        <li>Designed CXO command-center dashboards enabling business leaders to monitor sales performance, channel health, and operational risks in near real time.</li>
+        <li>Leveraged AI-assisted prototyping and rapid experimentation to accelerate product discovery, design validation, and stakeholder alignment.</li>
       </ul>
     </div>
 
     <div class="ei reveal">
-      <div class="ep">Mar 2022 — Jul 2023 · 1 yr 5 mos</div>
-      <div class="er">SDET-2</div>
-      <div class="ec">Mojocare · HealthTech</div>
+      <div class="ep">Jan 2024 — Dec 2025</div>
+      <div class="er">Associate Product Manager</div>
+      <div class="ec">Swish Club · Bengaluru, India · Employee Purchase Program (0→1)</div>
       <ul class="epts">
-        <li>Built and maintained automated test suites in Python + Selenium for web and mobile applications, dramatically improving testing efficiency and coverage.</li>
-        <li>Managed and mentored a team of 3 QA engineers, providing technical guidance and ensuring adherence to quality best practices.</li>
-        <li>Integrated automated testing into CI/CD pipelines, enabling faster release cycles across sexual wellness, women's health, mental wellness, and hair care products.</li>
-        <li>Executed comprehensive functional, regression, and performance testing across multiple platforms including mobile apps and internal dashboards.</li>
+        <li>Owned the end-to-end product lifecycle for India's first employee smartphone leasing platform, from discovery to launch.</li>
+        <li>Defined product vision, PRDs, roadmap prioritization, and execution across engineering, design, finance, compliance, operations, and sales.</li>
+        <li>Achieved 20%+ employee-to-paid conversion, contributing to recurring revenue growth and enterprise retention.</li>
+        <li>Increased Week-1 activation from 5% to 20% by redesigning onboarding journeys using gamification, contextual nudges, and simplified value communication.</li>
+        <li>Scaled adoption across 50+ enterprises including FamPay, StoneX, Zaggle, ClearTax, and Reliance Jio.</li>
+        <li>Led integrations with 25+ enterprise HRMS systems, designing API workflows, eligibility validation engines, and automated onboarding pipelines.</li>
       </ul>
     </div>
 
     <div class="ei reveal">
-      <div class="ep">Jul 2019 — Jan 2022 · 2 yrs 7 mos</div>
+      <div class="ep">Aug 2023 — Dec 2023</div>
+      <div class="er">Co-Founder</div>
+      <div class="ec">SnaxZero · Chennai, India</div>
+      <ul class="epts">
+        <li>Acquired 10+ B2B distribution and retail partners through direct outreach, partnership development, and market expansion initiatives.</li>
+        <li>Secured bulk B2B orders and established supplier relationships, managing end-to-end sourcing, packaging, pricing, and go-to-market execution.</li>
+      </ul>
+    </div>
+
+    <div class="ei reveal">
+      <div class="ep">May 2022 — Jul 2023</div>
+      <div class="er">SDET</div>
+      <div class="ec">MojoCare · Bengaluru, India</div>
+      <ul class="epts">
+        <li>Developed automation frameworks using Python and Selenium, improving test coverage and reducing manual testing effort.</li>
+        <li>Integrated automated test suites into CI/CD pipelines, enabling faster and more reliable software releases.</li>
+        <li>Executed functional, regression, performance, and cross-platform testing across web and mobile products.</li>
+      </ul>
+    </div>
+
+    <div class="ei reveal">
+      <div class="ep">Jul 2019 — Jan 2022</div>
       <div class="er">Senior Software Test Engineer</div>
-      <div class="ec">Dollop Infotech · Indore, India</div>
+      <div class="ec">Dollop Infotech</div>
       <ul class="epts">
-        <li>Started career in software quality engineering, building a strong foundation in cross-platform testing, test strategy, and engineering rigour.</li>
-        <li>Delivered reliable, high-quality software across client products in a fast-paced consulting environment.</li>
+        <li>Led testing and quality assurance activities across multiple client projects.</li>
+        <li>Designed and executed automation scripts, regression suites, and release validation processes.</li>
+        <li>Collaborated with cross-functional teams to improve software quality and delivery efficiency.</li>
       </ul>
     </div>
 
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="prj inner" id="projects">
-  <div class="ph reveal">
-    <div class="sl">Projects</div>
-    <h2 class="st">Work I'm <span class="ac">proud of</span></h2>
+
+<!-- CASE STUDIES -->
+<section id="projects" class="inner">
+<div class="work reveal">
+  <div class="work-label">Case Studies</div>
+  <div class="work-rule"></div>
+  <div class="work-grid">
+
+    <!-- POP Shop Fulfillment -->
+    <a class="wcard reveal" href="pop-shop-fulfillment.html">
+      <div class="wcard-cover">
+        <div class="wcard-cover-bg" style="background:radial-gradient(ellipse 70% 60% at 20% 75%,rgba(214,58,26,.6) 0%,transparent 55%),radial-gradient(ellipse 55% 65% at 80% 20%,rgba(245,158,11,.32) 0%,transparent 50%),linear-gradient(140deg,#1f0600,#2e0a00 50%,#0a0200);"></div>
+        <div class="wcard-dots"></div>
+        <div class="wcard-badge">POP Shop</div>
+        <div class="wcard-yr">2025</div>
+        <div class="wcard-grd"></div>
+        <div class="wcard-name">Fulfillment &amp; Post-Order Experience</div>
+      </div>
+      <div class="wcard-foot">
+        <div class="wcard-tags">
+          <span class="wcard-tag">WISMO</span>
+          <span class="wcard-tag">Retention</span>
+          <span class="wcard-tag">Product Strategy</span>
+        </div>
+        <div class="wcard-cta">View case study <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8m0 0L7 3m3.5 3.5L7 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <!-- Pharma Channel Intelligence -->
+    <div class="wcard wcard-soon reveal">
+      <div class="wcard-cover">
+        <div class="wcard-cover-bg" style="background:radial-gradient(ellipse 70% 60% at 25% 75%,rgba(16,185,129,.45) 0%,transparent 55%),radial-gradient(ellipse 50% 65% at 75% 25%,rgba(5,150,105,.2) 0%,transparent 50%),linear-gradient(140deg,#071f15,#0b3323 50%,#040f0a);"></div>
+        <div class="wcard-dots"></div>
+        <div class="wcard-badge">SwishX</div>
+        <div class="wcard-yr">2026</div>
+        <div class="wcard-grd"></div>
+        <div class="wcard-name">Pharma Channel Intelligence Platform</div>
+      </div>
+      <div class="wcard-foot">
+        <div class="wcard-tags">
+          <span class="wcard-tag">Channel Mgmt</span>
+          <span class="wcard-tag">Workflow Automation</span>
+          <span class="wcard-tag">AI</span>
+        </div>
+        <div class="wcard-cta">Coming soon</div>
+      </div>
+    </div>
+
+    <!-- Employee Smartphone Leasing -->
+    <div class="wcard wcard-soon reveal">
+      <div class="wcard-cover">
+        <div class="wcard-cover-bg" style="background:radial-gradient(ellipse 65% 60% at 28% 72%,rgba(124,58,237,.55) 0%,transparent 55%),radial-gradient(ellipse 50% 65% at 72% 28%,rgba(168,85,247,.25) 0%,transparent 50%),linear-gradient(140deg,#0d0520,#1e0f45 50%,#060210);"></div>
+        <div class="wcard-dots"></div>
+        <div class="wcard-badge">Swish Club</div>
+        <div class="wcard-yr">2024–25</div>
+        <div class="wcard-grd"></div>
+        <div class="wcard-name">Employee Smartphone Leasing — 0→1</div>
+      </div>
+      <div class="wcard-foot">
+        <div class="wcard-tags">
+          <span class="wcard-tag">0→1 Product</span>
+          <span class="wcard-tag">Growth</span>
+          <span class="wcard-tag">Fintech</span>
+        </div>
+        <div class="wcard-cta">Coming soon</div>
+      </div>
+    </div>
+
   </div>
-  <div class="pg">
-
-    <div class="pc reveal">
-      <div class="pnum">01 —</div>
-      <div class="pt">IT Asset Management Platform</div>
-      <div class="impact">↑ 5% → 15% MoM usage growth · 100+ enterprises</div>
-      <p class="pd">Built Swish Club's IT Asset Management product from scratch. Spent time in the field understanding IT Admin and HR pain points, then translated those insights into a streamlined, intuitive lifecycle management system — from asset onboarding, bulk upload, assignment, to depreciation.</p>
-      <div class="ptgs"><span class="ptg">0→1</span><span class="ptg">SaaS</span><span class="ptg">B2B</span><span class="ptg">IT Admin</span><span class="ptg">Process Simplification</span></div>
-    </div>
-
-    <div class="pc reveal">
-      <div class="pnum">02 —</div>
-      <div class="pt">Employee Smartphone Leasing</div>
-      <div class="impact">↑ Wk1 activation 5% → 20% · 50+ enterprises</div>
-      <p class="pd">Led the full product experience for Swish Club's tax-saving smartphone leasing platform for salaried employees. Designed gamified onboarding nudges and simplified user education via webinars — driving 20%+ conversion from sign-up to paying customer and significant revenue impact.</p>
-      <div class="ptgs"><span class="ptg">Growth</span><span class="ptg">Fintech</span><span class="ptg">Onboarding</span><span class="ptg">Gamification</span><span class="ptg">D2C</span></div>
-    </div>
-
-    <div class="pc reveal">
-      <div class="pnum">03 —</div>
-      <div class="pt">QA Automation at Mojocare</div>
-      <div class="impact">Team of 3 · Full CI/CD integration</div>
-      <p class="pd">Designed and owned the end-to-end test automation strategy at Mojocare — a high-growth D2C health startup. Built Python + Selenium suites, mentored a team of 3 engineers, and integrated automated testing into CI/CD pipelines enabling faster, more reliable releases across 4 health verticals.</p>
-      <div class="ptgs"><span class="ptg">Test Automation</span><span class="ptg">HealthTech</span><span class="ptg">Python</span><span class="ptg">CI/CD</span><span class="ptg">Team Leadership</span></div>
-    </div>
-
-  </div>
+</div>
 </section>
 
 <!-- CONTACT -->
@@ -338,15 +420,16 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
     <p class="cs">Open to new PM opportunities, collaborations, and conversations about product, Gen AI, and building 0→1.</p>
     <div class="cls">
       <a href="mailto:rajadarsh706@gmail.com" class="cl">✉ rajadarsh706@gmail.com</a>
-      <a href="https://www.linkedin.com/in/adarsh-rajsingh-4352a4134" class="cl" target="_blank">in LinkedIn</a>
+      <a href="https://linkedin.com/in/adarsh-raj-singh-4352a4134" class="cl" target="_blank">in LinkedIn</a>
       <a href="tel:+918608058365" class="cl">📞 +91 86080 58365</a>
-      <a href="https://swishclub.in" class="cl" target="_blank">↗ swishclub.in</a>
+      <a href="https://swishx.com/" class="cl" target="_blank">↗ swishx.com</a>
     </div>
   </div>
 </section>
 
+
 <footer>
-  <div class="fc">© 2025 Adarsh Raj Singh. Bengaluru, India.</div>
+  <div class="fc">© 2026 Adarsh Raj. Bengaluru, India.</div>
   <div class="fc">Built with <span>♥</span> and a product mindset</div>
 </footer>
 
@@ -483,6 +566,20 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // ─── NAV ───
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>40?'rgba(2,2,4,0.92)':'rgba(2,2,4,0.5)';});
+
+
+// ─── RESUME DOWNLOAD FEEDBACK ───
+const dlBtn = document.getElementById('dlBtn');
+if (dlBtn) {
+  dlBtn.addEventListener('click', () => {
+    dlBtn.classList.add('done');
+    dlBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8l3.5 3.5L13 4" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Downloaded!`;
+    setTimeout(() => {
+      dlBtn.classList.remove('done');
+      dlBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 1v9m0 0L4.5 7m3 3L10.5 7M2 13h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Download Resume`;
+    }, 3000);
+  });
+}
 </script>
 </body>
 </html>
