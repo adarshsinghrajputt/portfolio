@@ -281,15 +281,22 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
 }
 
 @media(max-width:600px){
-  /* ── Hero: remove absolute scroll cue that overlaps stacked buttons ── */
-  .scue{display:none;}
-  .hero{padding:8rem 1.25rem 3rem;justify-content:flex-start;}
-  /* Reduce vertical gaps between hero elements so content breathes */
-  .badge{font-size:.62rem;letter-spacing:.1em;padding:.4rem 1rem;margin-bottom:1.5rem;}
-  .hn{font-size:clamp(2.4rem,13vw,3.2rem);margin-bottom:1rem;}
-  .hd{font-size:.95rem;margin-bottom:1.75rem;}
+  /* Kill the absolute scroll indicator — it overlaps stacked buttons */
+  .scue{display:none!important;}
+  /* Hero: top padding clears the fixed nav (~65px) + gives breathing room */
+  .hero{padding:7rem 1.25rem 3rem!important;justify-content:flex-start!important;}
+  /* Push the content block down a bit more for safety */
+  .hcont{padding-top:1rem;}
+  /* Badge */
+  .badge{font-size:.6rem;letter-spacing:.1em;padding:.38rem .9rem;margin-bottom:1.25rem;}
+  /* Heading: much smaller so it doesn't split into 5 lines.
+     At 390px: 8.5vw ≈ 33px — "Adarsh Raj" fits 1 line,
+     "Building 0→1 Products." wraps to 2 lines max. */
+  .hn{font-size:clamp(1.7rem,8.5vw,2.1rem)!important;margin-bottom:.85rem;line-height:1.05;}
+  /* Description */
+  .hd{font-size:.9rem;line-height:1.75;margin-bottom:1.5rem;}
   /* Stack CTA buttons full-width */
-  .hcta{flex-direction:column;align-items:stretch;gap:.75rem;}
+  .hcta{flex-direction:column;align-items:stretch;gap:.65rem;}
   .bp,.bo{text-align:center;}
   .bd{justify-content:center;}
   /* Work grid: single column */
@@ -297,11 +304,11 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   /* Contact links */
   .cls{flex-direction:column;align-items:center;}
   .cl{max-width:300px;justify-content:center;}
-  /* About stats: keep 2-col */
+  /* About stats */
   .sg{grid-template-columns:1fr 1fr;}
   /* Contact section */
   .ctc{padding:4rem 1.25rem;}
-  .ctt{font-size:clamp(2.2rem,11vw,3.5rem);}
+  .ctt{font-size:clamp(2rem,10vw,3rem);}
 }
 </style>
 </head>
