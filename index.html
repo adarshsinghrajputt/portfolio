@@ -257,22 +257,30 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
 }
 
 @media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
+  nav{
+    padding:1rem 1.5rem;
+    /* Remove backdrop-filter so fixed-position .nm is relative to the viewport, not nav */
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    background:rgba(2,2,4,0.96);
+  }
   .nb{display:flex;}
 
-  /* ── Mobile nav: solid black so the canvas animation can't bleed through ── */
+  /* ── Mobile nav: solid overlay, fixed to viewport (backdrop-filter removed from nav above) ── */
   .nm{
-    position:fixed;top:0;left:0;right:0;bottom:0;
+    position:fixed !important;
+    top:0 !important;left:0 !important;
+    width:100vw !important;height:100vh !important;
     flex-direction:column;align-items:flex-start;justify-content:center;
     gap:0;
-    background:#06060e;          /* 100% opaque — no transparency */
+    background:#020204 !important;
     transform:translateX(100%);opacity:0;pointer-events:none;
     transition:transform .35s cubic-bezier(.25,.46,.45,.94),opacity .25s;
     z-index:95;
-    padding:5.5rem 2rem 3rem;    /* top clears the nav bar */
+    padding:6rem 2.5rem 3rem;
     list-style:none;
   }
-  .nm.open{transform:translateX(0);opacity:1;pointer-events:all;}
+  .nm.open{transform:translateX(0) !important;opacity:1 !important;pointer-events:all;}
 
   /* Divider-style list items */
   .nm li{width:100%;border-bottom:1px solid rgba(255,255,255,.07);}
