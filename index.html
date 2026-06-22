@@ -136,6 +136,72 @@ nav {
 .wcard:hover .wcard-cta svg { transform:translateX(3px); }
 .wcard-soon { opacity:.4;pointer-events:none;cursor:default; }
 
+/* ─── PPT MODAL ─── */
+.pmover {
+  position:fixed;inset:0;z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .28s ease;
+}
+.pmover.open { opacity:1;pointer-events:all; }
+.pmbd {
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.82);backdrop-filter:blur(14px);cursor:pointer;
+}
+.pmbox {
+  position:relative;z-index:1;
+  width:min(95vw,1100px);height:min(93vh,860px);
+  background:#070710;
+  border:1px solid rgba(255,255,255,.08);border-radius:18px;
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:scale(.95) translateY(16px);
+  transition:transform .3s cubic-bezier(.25,.46,.45,.94);
+  box-shadow:0 40px 100px rgba(0,0,0,.7);
+}
+.pmover.open .pmbox { transform:scale(1) translateY(0); }
+.pmhd {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;
+}
+.pmttl {
+  font-family:var(--fd);font-size:.88rem;font-weight:700;color:var(--white);
+  display:flex;align-items:center;gap:.65rem;
+}
+.pmttl-tag {
+  font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  padding:.22rem .65rem;border-radius:100px;
+  background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.28);color:var(--purple-glow);
+}
+.pmclose {
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;line-height:1;transition:all .2s;
+}
+.pmclose:hover { background:rgba(255,255,255,.1);color:var(--white);border-color:rgba(255,255,255,.18); }
+.pmifr {
+  flex:1;position:relative;background:#050509;
+}
+.pmifr iframe {
+  width:100%;height:100%;border:none;display:block;
+}
+.pmld {
+  position:absolute;inset:0;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  background:#050509;transition:opacity .3s;
+}
+.pmld.hide { opacity:0; }
+.pmspin {
+  width:30px;height:30px;
+  border:2px solid rgba(255,255,255,.06);border-top-color:var(--purple-mid);
+  border-radius:50%;animation:spin .75s linear infinite;
+}
+.pmld-txt { font-size:.78rem;color:var(--muted);letter-spacing:.08em; }
+@keyframes spin { to{transform:rotate(360deg)} }
+@media(max-width:600px){
+  .pmbox{width:100vw;height:100dvh;border-radius:0;}
+}
+
 .ctc { padding:8rem 4rem;text-align:center;position:relative;overflow:hidden; }
 .ctc::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%);pointer-events:none; }
 .ctt { font-family:var(--fd);font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem; }
@@ -349,7 +415,7 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <div class="work-grid">
 
     <!-- POP Shop Fulfillment -->
-    <a class="wcard reveal" href="pop-shop-fulfillment.html">
+    <div class="wcard reveal" onclick="openPdfModal('POP Shop Fulfillment')" style="cursor:none;">
       <div class="wcard-cover">
         <div class="wcard-cover-bg" style="background:radial-gradient(ellipse 70% 60% at 20% 75%,rgba(214,58,26,.6) 0%,transparent 55%),radial-gradient(ellipse 55% 65% at 80% 20%,rgba(245,158,11,.32) 0%,transparent 50%),linear-gradient(140deg,#1f0600,#2e0a00 50%,#0a0200);"></div>
         <div class="wcard-dots"></div>
@@ -366,7 +432,7 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="wcard-cta">View case study <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8m0 0L7 3m3.5 3.5L7 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
-    </a>
+    </div>
 
     <!-- Pharma Channel Intelligence -->
     <div class="wcard wcard-soon reveal">
@@ -432,6 +498,27 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <div class="fc">© 2026 Adarsh Raj. Bengaluru, India.</div>
   <div class="fc">Built with <span>♥</span> and a product mindset</div>
 </footer>
+
+<!-- PPT MODAL -->
+<div class="pmover" id="pmover" role="dialog" aria-modal="true" aria-label="Case study viewer">
+  <div class="pmbd" onclick="closePdfModal()"></div>
+  <div class="pmbox">
+    <div class="pmhd">
+      <div class="pmttl">
+        <span id="pmTitle">Case Study</span>
+        <span class="pmttl-tag">PPT</span>
+      </div>
+      <button class="pmclose" onclick="closePdfModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="pmifr">
+      <iframe id="pmIframe" allowfullscreen title="Case Study Presentation"></iframe>
+      <div class="pmld" id="pmld">
+        <div class="pmspin"></div>
+        <div class="pmld-txt">Loading presentation…</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 // ─── HERO CANVAS: Stars + 3D Wireframe Sphere ───
@@ -567,6 +654,32 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // ─── NAV ───
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>40?'rgba(2,2,4,0.92)':'rgba(2,2,4,0.5)';});
 
+
+// ─── PPT MODAL (Office Online viewer) ───
+const PPT_URL = 'https://adarshsinghrajputt.github.io/portfolio/POP_Assignment_Adarsh_Raj.pptx';
+
+function openPdfModal(title) {
+  const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(PPT_URL);
+  document.getElementById('pmTitle').textContent = title;
+  document.getElementById('pmld').classList.remove('hide');
+  const iframe = document.getElementById('pmIframe');
+  iframe.src = '';
+  iframe.onload = () => document.getElementById('pmld').classList.add('hide');
+  iframe.src = viewerUrl;
+  document.getElementById('pmover').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePdfModal() {
+  document.getElementById('pmover').classList.remove('open');
+  document.getElementById('pmIframe').src = '';
+  document.getElementById('pmld').classList.remove('hide');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('pmover').classList.contains('open') && e.key === 'Escape') closePdfModal();
+});
 
 // ─── RESUME DOWNLOAD FEEDBACK ───
 const dlBtn = document.getElementById('dlBtn');
