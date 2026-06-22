@@ -259,19 +259,48 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .nb{display:flex;}
-  /* Mobile nav overlay */
+
+  /* ── Mobile nav: solid black so the canvas animation can't bleed through ── */
   .nm{
     position:fixed;top:0;left:0;right:0;bottom:0;
-    flex-direction:column;align-items:center;justify-content:center;
-    gap:2.5rem;
-    background:rgba(2,2,4,.97);backdrop-filter:blur(24px);
+    flex-direction:column;align-items:flex-start;justify-content:center;
+    gap:0;
+    background:#06060e;          /* 100% opaque — no transparency */
     transform:translateX(100%);opacity:0;pointer-events:none;
-    transition:transform .38s cubic-bezier(.25,.46,.45,.94),opacity .3s;
-    z-index:90;
+    transition:transform .35s cubic-bezier(.25,.46,.45,.94),opacity .25s;
+    z-index:95;
+    padding:5.5rem 2rem 3rem;    /* top clears the nav bar */
+    list-style:none;
   }
   .nm.open{transform:translateX(0);opacity:1;pointer-events:all;}
-  .nm a{font-size:1.15rem;letter-spacing:.07em;color:var(--white);}
-  .nm li:last-child a{border:1px solid rgba(168,85,247,.4);padding:.6rem 1.4rem;border-radius:6px;}
+
+  /* Divider-style list items */
+  .nm li{width:100%;border-bottom:1px solid rgba(255,255,255,.07);}
+  .nm li:first-child{border-top:1px solid rgba(255,255,255,.07);}
+
+  /* Each link: dot bullet + full-width tap target */
+  .nm a{
+    display:flex;align-items:center;gap:.85rem;
+    padding:1.1rem 0;
+    font-family:var(--fd);font-size:1rem;font-weight:700;
+    letter-spacing:.08em;color:var(--muted);
+    width:100%;transition:color .2s,padding-left .2s;
+  }
+  .nm a:hover{color:var(--white);padding-left:.35rem;}
+
+  /* Purple dot bullet before every item */
+  .nm a::before{
+    content:'';width:5px;height:5px;border-radius:50%;
+    background:var(--purple-mid);flex-shrink:0;
+    box-shadow:0 0 6px rgba(168,85,247,.6);
+  }
+
+  /* Resume link: accent colour, no bottom border override */
+  .nm li:last-child{border-bottom:none;padding-top:.5rem;}
+  .nm li:last-child a{color:var(--purple-glow);}
+  .nm li:last-child a::before{background:var(--purple-glow);box-shadow:0 0 6px rgba(216,180,254,.6);}
+
+  /* Rest of layout rules */
   .abt{grid-template-columns:1fr;padding:5rem 1.5rem;gap:2rem;}
   .aright{display:none;}
   .skl,.ctc,.work{padding:5rem 1.5rem;}
