@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/adarshsingh/Downloads/ | head -20)",
+      "Read(//Users/adarshsingh/Downloads/**)",
+      "Bash(cp \"/Users/adarshsingh/Downloads/Adarsh_resume.pdf\" \"/Users/adarshsingh/Downloads/portfolio/Adarsh_resume.pdf\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(python3 -m http.server 8765)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8765/)",
+      "Bash(open /Users/adarshsingh/Downloads/portfolio/index.html)"
+    ],
+    "additionalDirectories": [
+      "/Users/adarshsingh/Downloads"
+    ]
+  }
+}

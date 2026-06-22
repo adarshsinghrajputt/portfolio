@@ -181,16 +181,14 @@ nav {
 .pmclose:hover { background:rgba(255,255,255,.1);color:var(--white);border-color:rgba(255,255,255,.18); }
 .pmifr {
   flex:1;position:relative;background:#050509;
-}
-.pmifr iframe {
-  width:100%;height:100%;border:none;display:block;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;padding:.75rem;
 }
 .pmld {
   position:absolute;inset:0;pointer-events:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
-  background:#050509;transition:opacity .3s;
+  background:#050509;
 }
-.pmld.hide { opacity:0; }
+.pmld.hide { display:none; }
 .pmspin {
   width:30px;height:30px;
   border:2px solid rgba(255,255,255,.06);border-top-color:var(--purple-mid);
@@ -198,8 +196,23 @@ nav {
 }
 .pmld-txt { font-size:.78rem;color:var(--muted);letter-spacing:.08em; }
 @keyframes spin { to{transform:rotate(360deg)} }
+.pmft {
+  display:flex;align-items:center;justify-content:center;gap:1.25rem;
+  padding:.8rem 1.25rem;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0;
+}
+.pmarr {
+  width:38px;height:38px;border-radius:8px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  color:var(--white);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.pmarr:hover:not(:disabled) { background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.4);color:var(--purple-glow); }
+.pmarr:disabled { opacity:.2;cursor:not-allowed; }
+.pmpg { font-family:var(--fd);font-size:.8rem;color:var(--muted);min-width:64px;text-align:center; }
+.pmkb { font-size:.62rem;color:rgba(255,255,255,.14);letter-spacing:.1em;text-transform:uppercase;margin-left:auto; }
 @media(max-width:600px){
   .pmbox{width:100vw;height:100dvh;border-radius:0;}
+  .pmkb{display:none;}
 }
 
 .ctc { padding:8rem 4rem;text-align:center;position:relative;overflow:hidden; }
@@ -511,11 +524,21 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
       <button class="pmclose" onclick="closePdfModal()" aria-label="Close">✕</button>
     </div>
     <div class="pmifr">
-      <iframe id="pmIframe" allowfullscreen title="Case Study Presentation"></iframe>
-      <div class="pmld" id="pmld">
+      <img id="pmSlideImg" src="" alt="Slide" style="max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity .18s ease;border-radius:4px;">
+      <div class="pmld hide" id="pmld">
         <div class="pmspin"></div>
-        <div class="pmld-txt">Loading presentation…</div>
+        <div class="pmld-txt">Loading…</div>
       </div>
+    </div>
+    <div class="pmft">
+      <button class="pmarr" id="pmPrev" onclick="pmChangePage(-1)" disabled>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="pmpg" id="pmPg">1 / 12</span>
+      <button class="pmarr" id="pmNext" onclick="pmChangePage(1)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="pmkb">← → navigate &nbsp;·&nbsp; esc close</span>
     </div>
   </div>
 </div>
@@ -655,30 +678,52 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>40?'rgba(2,2,4,0.92)':'rgba(2,2,4,0.5)';});
 
 
-// ─── PPT MODAL (Office Online viewer) ───
-const PPT_URL = 'https://adarshsinghrajputt.github.io/portfolio/POP_Assignment_Adarsh_Raj.pptx';
+// ─── PPT MODAL (local slide images) ───
+const PM_SLIDES = Array.from({length:12},(_,i)=>`assets/slides/slide_${String(i+1).padStart(2,'0')}.png`);
+let pmCur = 0;
 
 function openPdfModal(title) {
-  const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(PPT_URL);
+  pmCur = 0;
   document.getElementById('pmTitle').textContent = title;
-  document.getElementById('pmld').classList.remove('hide');
-  const iframe = document.getElementById('pmIframe');
-  iframe.src = '';
-  iframe.onload = () => document.getElementById('pmld').classList.add('hide');
-  iframe.src = viewerUrl;
   document.getElementById('pmover').classList.add('open');
   document.body.style.overflow = 'hidden';
+  pmShow(0);
+}
+
+function pmShow(idx) {
+  const img = document.getElementById('pmSlideImg');
+  const loader = document.getElementById('pmld');
+  img.style.opacity = '0';
+  loader.classList.remove('hide');
+  const newImg = new Image();
+  newImg.onload = () => {
+    img.src = newImg.src;
+    img.style.opacity = '1';
+    loader.classList.add('hide');
+  };
+  newImg.src = PM_SLIDES[idx];
+  document.getElementById('pmPg').textContent = `${idx+1} / ${PM_SLIDES.length}`;
+  document.getElementById('pmPrev').disabled = idx === 0;
+  document.getElementById('pmNext').disabled = idx === PM_SLIDES.length - 1;
+}
+
+function pmChangePage(dir) {
+  const next = pmCur + dir;
+  if (next < 0 || next >= PM_SLIDES.length) return;
+  pmCur = next;
+  pmShow(pmCur);
 }
 
 function closePdfModal() {
   document.getElementById('pmover').classList.remove('open');
-  document.getElementById('pmIframe').src = '';
-  document.getElementById('pmld').classList.remove('hide');
   document.body.style.overflow = '';
 }
 
 document.addEventListener('keydown', e => {
-  if (document.getElementById('pmover').classList.contains('open') && e.key === 'Escape') closePdfModal();
+  if (!document.getElementById('pmover').classList.contains('open')) return;
+  if (e.key === 'Escape')     closePdfModal();
+  if (e.key === 'ArrowRight') pmChangePage(1);
+  if (e.key === 'ArrowLeft')  pmChangePage(-1);
 });
 
 // ─── RESUME DOWNLOAD FEEDBACK ───
