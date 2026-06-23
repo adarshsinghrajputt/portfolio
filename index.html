@@ -577,7 +577,7 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
     </div>
 
     <!-- Employee Smartphone Leasing -->
-    <div class="wcard reveal" onclick="window.location.href='daas-smartphone-leasing.html'">
+    <div class="wcard reveal" onclick="openGSlidesModal('Employee Smartphone Leasing')">
       <div class="wcard-cover">
         <div class="wcard-cover-bg" style="background:radial-gradient(ellipse 65% 60% at 28% 72%,rgba(124,58,237,.55) 0%,transparent 55%),radial-gradient(ellipse 50% 65% at 72% 28%,rgba(168,85,247,.25) 0%,transparent 50%),linear-gradient(140deg,#0d0520,#1e0f45 50%,#060210);"></div>
         <div class="wcard-dots"></div>
@@ -632,14 +632,16 @@ footer { padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justi
       </div>
       <button class="pmclose" onclick="closePdfModal()" aria-label="Close">✕</button>
     </div>
-    <div class="pmifr">
+    <div class="pmifr" id="pmifr">
       <img id="pmSlideImg" src="" alt="Slide" style="max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity .18s ease;border-radius:4px;">
+      <iframe id="pmGSlidesIframe" src="" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
+        style="display:none;width:100%;height:100%;border:none;border-radius:4px;"></iframe>
       <div class="pmld hide" id="pmld">
         <div class="pmspin"></div>
         <div class="pmld-txt">Loading…</div>
       </div>
     </div>
-    <div class="pmft">
+    <div class="pmft" id="pmft">
       <button class="pmarr" id="pmPrev" onclick="pmChangePage(-1)" disabled>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -823,9 +825,33 @@ function pmChangePage(dir) {
   pmShow(pmCur);
 }
 
+function openGSlidesModal(title) {
+  document.getElementById('pmTitle').textContent = title;
+  document.getElementById('pmover').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Hide PNG slide elements, show GSlides iframe
+  document.getElementById('pmSlideImg').style.display = 'none';
+  document.getElementById('pmft').style.display = 'none';
+  document.getElementById('pmifr').style.padding = '0';
+  const iframe = document.getElementById('pmGSlidesIframe');
+  iframe.style.display = 'block';
+  document.getElementById('pmld').classList.remove('hide');
+  iframe.onload = () => document.getElementById('pmld').classList.add('hide');
+  iframe.src = 'https://docs.google.com/presentation/d/1tZGNBHBRU1opwHGO2ClxhDVisnMYV4bA/embed?start=false&loop=false&delayms=3000';
+}
+
 function closePdfModal() {
   document.getElementById('pmover').classList.remove('open');
   document.body.style.overflow = '';
+  // Reset GSlides mode if it was active
+  const iframe = document.getElementById('pmGSlidesIframe');
+  if (iframe.style.display === 'block') {
+    iframe.src = '';
+    iframe.style.display = 'none';
+    document.getElementById('pmSlideImg').style.display = 'block';
+    document.getElementById('pmft').style.display = '';
+    document.getElementById('pmifr').style.padding = '';
+  }
 }
 
 document.addEventListener('keydown', e => {
