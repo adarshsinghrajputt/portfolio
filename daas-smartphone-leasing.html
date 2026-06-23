@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DaaS — Employee Smartphone Leasing · Adarsh Raj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#020204;--card:#0e0e18;--white:#fff;
+  --muted:rgba(255,255,255,.45);--border:rgba(255,255,255,.07);
+  --purple:#7c3aed;--purple-mid:#a855f7;--purple-glow:#d8b4fe;
+  --fd:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
+}
+html,body{height:100%;background:var(--black);color:var(--white);font-family:var(--fb);}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1.1rem 2.5rem;
+  background:rgba(2,2,4,.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-back{
+  display:inline-flex;align-items:center;gap:.45rem;
+  color:var(--muted);text-decoration:none;
+  font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-back svg{transition:transform .2s;}
+.nav-back:hover{color:var(--white);}
+.nav-back:hover svg{transform:translateX(-3px);}
+.nav-title{font-family:var(--fd);font-size:.88rem;font-weight:700;}
+.nav-badge{
+  font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  padding:.28rem .85rem;border-radius:100px;
+  background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);color:var(--purple-glow);
+}
+
+/* ── HEADER ── */
+.header{
+  padding:7rem 5rem 3rem;
+  background:radial-gradient(ellipse 65% 60% at 20% 80%,rgba(124,58,237,.45) 0%,transparent 55%),
+             radial-gradient(ellipse 50% 65% at 80% 15%,rgba(168,85,247,.22) 0%,transparent 50%),
+             linear-gradient(180deg,#0d0520,#060210 60%,#020204);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:1000px;margin:0 auto;}
+.header-label{
+  font-size:.6rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--purple-glow);margin-bottom:.85rem;
+  display:inline-flex;align-items:center;gap:.65rem;
+}
+.header-label::after{content:'';width:28px;height:1px;background:rgba(168,85,247,.4);}
+.header-h1{
+  font-family:var(--fd);font-size:clamp(1.8rem,4vw,3rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1.1;margin-bottom:.75rem;
+}
+.header-sub{font-size:1rem;color:var(--muted);font-weight:300;line-height:1.75;max-width:640px;margin-bottom:2rem;}
+.header-meta{display:flex;flex-wrap:wrap;gap:2rem;}
+.hm{display:flex;flex-direction:column;gap:.2rem;}
+.hm-l{font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.hm-v{font-size:.88rem;font-weight:500;color:var(--white);}
+
+/* ── DECK AREA ── */
+.deck-wrap{
+  max-width:1000px;margin:0 auto;
+  padding:2.5rem 5rem 4rem;
+}
+.deck-label{
+  font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.65rem;
+}
+.deck-label::before{content:'';width:16px;height:1px;background:var(--border);}
+.deck-frame{
+  width:100%;
+  /* 16:9 aspect ratio container */
+  aspect-ratio:16/9;
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  background:var(--card);
+  position:relative;
+}
+.deck-frame iframe{width:100%;height:100%;border:none;display:block;}
+
+/* Fallback shown when iframe can't load */
+.deck-fallback{
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:1.25rem;text-align:center;padding:2rem;
+}
+.deck-fallback p{font-size:.95rem;color:var(--muted);font-weight:300;line-height:1.7;max-width:420px;}
+.deck-fallback a{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.85rem 1.75rem;border-radius:8px;
+  font-family:var(--fd);font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  background:var(--purple);color:var(--white);text-decoration:none;
+  transition:all .25s;
+}
+.deck-fallback a:hover{background:#6d28d9;transform:translateY(-2px);box-shadow:0 12px 36px rgba(124,58,237,.4);}
+
+/* Loading shimmer */
+.deck-loading{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--card);
+  font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  gap:.6rem;
+}
+.deck-loading-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--purple-mid);
+  animation:dotpulse .9s ease-in-out infinite;
+}
+.deck-loading-dot:nth-child(2){animation-delay:.15s;}
+.deck-loading-dot:nth-child(3){animation-delay:.3s;}
+@keyframes dotpulse{0%,100%{opacity:.2;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+.deck-loading.hide{display:none;}
+
+@media(max-width:900px){
+  .header{padding:5.5rem 1.75rem 2.5rem;}
+  .deck-wrap{padding:2rem 1.5rem 3rem;}
+  .nav{padding:1rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-back" href="index.html#projects">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 2L3.5 7L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Case Studies
+  </a>
+  <span class="nav-title">Employee Smartphone Leasing</span>
+  <span class="nav-badge">PM Case Study</span>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-label">Case Study</div>
+    <h1 class="header-h1">DaaS — Employee Smartphone<br/>Leasing, Built 0→1</h1>
+    <p class="header-sub">India's first employee smartphone leasing platform. Owned end-to-end product lifecycle across discovery, design, and launch — cutting drop-off at the verification step that broke intent.</p>
+    <div class="header-meta">
+      <div class="hm">
+        <span class="hm-l">Company</span>
+        <span class="hm-v">Swish Club · SwishX</span>
+      </div>
+      <div class="hm">
+        <span class="hm-l">Timeline</span>
+        <span class="hm-v">2024 – 2025</span>
+      </div>
+      <div class="hm">
+        <span class="hm-l">Role</span>
+        <span class="hm-v">Product Manager</span>
+      </div>
+      <div class="hm">
+        <span class="hm-l">Vertical</span>
+        <span class="hm-v">Fintech · Employee Benefits</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="deck-wrap">
+  <div class="deck-label">Full Case Study Deck</div>
+  <div class="deck-frame" id="deckFrame">
+    <div class="deck-loading" id="deckLoading">
+      <div class="deck-loading-dot"></div>
+      <div class="deck-loading-dot"></div>
+      <div class="deck-loading-dot"></div>
+      Loading presentation
+    </div>
+    <iframe
+      id="deckIframe"
+      title="DaaS Smartphone Leasing Case Study"
+      src="https://view.officeapps.live.com/op/embed.aspx?src=https://adarshsinghrajputt.github.io/portfolio/assets/DaaS_PM_v3.pptx&wdAr=1.7778"
+      allowfullscreen
+      style="opacity:0;transition:opacity .4s;">
+    </iframe>
+    <div class="deck-fallback" id="deckFallback">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="4" width="22" height="32" rx="3" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M14 14h10M14 19h10M14 24h6" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/><path d="M22 4v8h8" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p>The presentation could not be displayed inline. Click below to download the full case study deck.</p>
+      <a href="assets/DaaS_PM_v3.pptx" download="DaaS_Smartphone_Leasing_Adarsh_Raj.pptx">Download Deck ↓</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const iframe = document.getElementById('deckIframe');
+const loading = document.getElementById('deckLoading');
+
+iframe.addEventListener('load', function() {
+  loading.classList.add('hide');
+  iframe.style.opacity = '1';
+});
+
+// If iframe hasn't loaded after 12s, show fallback
+setTimeout(function() {
+  if (iframe.style.opacity !== '1') {
+    showFallback();
+  }
+}, 12000);
+
+function showFallback() {
+  loading.classList.add('hide');
+  iframe.style.display = 'none';
+  document.getElementById('deckFallback').style.display = 'flex';
+}
+</script>
+</body>
+</html>
